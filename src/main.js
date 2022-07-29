@@ -79,7 +79,6 @@ deleteListBtn.addEventListener('click', () => {
     saveAndRender()
 })
 
-
 newTaskBtn.addEventListener('click', () => {
     taskFormOverlay.style.visibility = 'visible'
     taskForm.style.visibility = 'visible'
@@ -109,6 +108,12 @@ tasksContainer.addEventListener('click', e => {
     }
 })
 
+function exitTaskForm() {
+    taskFormOverlay.style.visibility = 'hidden'
+    taskForm.style.visibility = 'hidden'
+    taskForm.reset()
+}
+
 taskForm.addEventListener('submit', e => {
     e.preventDefault()
     const task = new Task
@@ -120,15 +125,12 @@ taskForm.addEventListener('submit', e => {
         )
     const selectedList = lists.find(list => list.id === selectedListId)
     selectedList.tasks.push(task)
-    console.log(selectedList.tasks)
-    saveAndRender()
     exitTaskForm()
+    saveAndRender()
 })
 
 taskFormExitBtn.addEventListener('click', () => {
-    taskFormOverlay.style.visibility = 'hidden'
-    taskForm.style.visibility = 'hidden'
-    taskForm.reset()
+    exitTaskForm()
 })
 
 clearTasksBtn.addEventListener('click', () => {
